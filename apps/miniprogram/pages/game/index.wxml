@@ -1,0 +1,85 @@
+<!-- 游戏页 -->
+<view wx:if="{{view === 'game'}}" class="container">
+  <view class="page-head">
+    <text class="badge">{{game.modeLabel}}{{game.categorySuffix}}</text>
+    <text class="sound-btn" bindtap="onToggleSound">{{soundOn ? '🔊' : '🔇'}}</text>
+    <view class="metrics">
+      <view class="metric">
+        <text class="metric-num">{{g.score}}</text>
+        <text class="metric-label">分</text>
+      </view>
+      <view class="metric">
+        <text class="metric-num">{{game.progressText}}</text>
+        <text class="metric-label {{game.timerLow ? 'metric-timer-low' : 'metric-timer'}}">{{game.timerLabel}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="progress-track">
+    <view class="progress-bar {{game.barLow ? 'progress-low' : ''}}" style="width: {{game.barPercent}}%;" />
+  </view>
+
+  <text wx:if="{{g.combo >= 2}}" class="combo">连击 × {{g.combo}} {{game.stars}}</text>
+  <view wx:else class="combo" />
+
+  <view wx:if="{{g.current}}" class="qcard">
+    <text class="qtag">{{g.current.c}}</text>
+    <text class="qtext">{{g.current.q}}</text>
+    <text class="qhint">上面这种情况，对应的规范表达是？</text>
+
+    <view class="opts">
+      <view
+        wx:for="{{game.opts}}"
+        wx:key="text"
+        class="opt {{item.cls}}"
+        hover-class="{{game.locked ? 'none' : 'opt-pressed'}}"
+        hover-stay-time="80"
+        data-index="{{index}}"
+        bindtap="onOptionTap"
+      >
+        <text class="opt-key {{item.keyCls}}">{{index + 1}}</text>
+        <text class="opt-text">{{item.text}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{g.locked}}" class="explain {{game.explainCls}}">
+      <text class="explain-title">{{game.explainTitle}}</text>
+      <text wx:if="{{!game.explainOk}}" class="explain-answer">{{g.current.a}}</text>
+      <view class="next-btn" hover-class="next-btn-pressed" bindtap="onNextTap">
+        <text>{{game.nextLabel}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 结果页 -->
+<view wx:else class="container">
+  <view class="result">
+    <text class="result-label">本局得分</text>
+    <text class="score">{{g.score}}</text>
+    <view class="rank-wrap">
+      <text class="rank">{{result.rank}}</text>
+    </view>
+    <view class="rgrid">
+      <view wx:for="{{result.cards}}" wx:key="label" class="stat-card">
+        <text class="stat-num">{{item.num}}</text>
+        <text class="stat-label">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{mistakes.length > 0}}" class="review">
+      <text class="review-title">本局错题回顾</text>
+      <view wx:for="{{mistakes}}" wx:key="id" class="ritem">
+        <text class="rq">{{item.q}}</text>
+        <text class="ra">→ {{item.a}}</text>
+      </view>
+    </view>
+
+    <view class="primary-btn" hover-class="next-btn-pressed" bindtap="onReplay">
+      <text>再来一局</text>
+    </view>
+    <view class="ghost-btn" hover-class="next-btn-pressed" bindtap="onBackHome">
+      <text>返回主菜单</text>
+    </view>
+  </view>
+</view>

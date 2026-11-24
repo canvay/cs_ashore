@@ -1,6 +1,193 @@
+/* 全局共享样式（各页面的专属样式在各自 index.wxss 里） */
 page {
   background: #ffffff;
   color: #18181b;
-  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  padding: 16px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  padding: 32px 0 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #2563eb;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+.hero-title {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+}
+.hero-sub {
+  font-size: 12px;
+  color: rgba(24, 24, 27, 0.6);
+  margin-top: 10px;
+  line-height: 1.7;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* ---------- 统计卡 ---------- */
+.stats {
+  display: flex;
+  gap: 8px;
+}
+.stat-card {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #f4f4f5;
+  border-radius: 12px;
+  padding: 12px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stat-num {
+  font-size: 17px;
+  font-weight: 800;
+  color: #2563eb;
+}
+.stat-label {
+  font-size: 10px;
+  color: rgba(24, 24, 27, 0.55);
+  margin-top: 2px;
+}
+
+/* ---------- 列表 ---------- */
+.section-label {
+  display: block;
+  font-size: 11px;
+  color: rgba(24, 24, 27, 0.5);
+  letter-spacing: 2px;
+  margin: 26px 0 10px;
+  font-weight: 500;
+}
+.mode-card {
+  background: #fff;
+  border: 1px solid #f4f4f5;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.mode-card-pressed {
+  transform: scale(0.98);
+  background: #fafafa;
+}
+.mode-num {
+  display: block;
+  font-size: 10px;
+  color: #d97706;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.mode-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.mode-desc {
+  font-size: 12px;
+  color: rgba(24, 24, 27, 0.6);
+  line-height: 1.6;
+  margin-top: 4px;
+  padding-right: 24px;
+  display: block;
+}
+.mode-arrow {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  color: rgba(24, 24, 27, 0.3);
+  font-size: 14px;
+}
+.cat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cat-count {
+  font-size: 12px;
+  color: rgba(24, 24, 27, 0.55);
+}
+
+/* ---------- 页头（游戏页） ---------- */
+.page-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.badge {
+  display: inline-block;
+  background: #f4f4f5;
+  color: #3f3f46;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 99px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.sound-btn {
+  margin-left: auto;
+  font-size: 16px;
+  padding: 2px 6px;
+}
+.metrics {
+  margin-left: 12px;
+  display: flex;
+  gap: 14px;
+}
+.metric {
+  text-align: right;
+}
+.metric-num {
+  font-size: 16px;
+  font-weight: 700;
+  display: block;
+}
+.metric-label {
+  font-size: 10px;
+  color: rgba(24, 24, 27, 0.55);
+}
+.metric-timer {
+  color: #18181b;
+  font-weight: 700;
+}
+.metric-timer-low {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.note {
+  display: block;
+  margin-top: 28px;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(24, 24, 27, 0.4);
+  line-height: 1.7;
 }

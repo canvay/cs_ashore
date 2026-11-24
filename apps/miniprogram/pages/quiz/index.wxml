@@ -1,0 +1,33 @@
+<!-- 黑话挑战模块主页 -->
+<view class="container">
+  <view class="hero">
+    <view class="brand-logo">申</view>
+    <text class="hero-title">把大白话，翻译成体制内的表达</text>
+    <text class="hero-sub">看到材料别慌。给你一段场景，选出它的规范表达——答得越多，写得越像。</text>
+  </view>
+
+  <view class="stats">
+    <view wx:for="{{statsCards}}" wx:key="label" class="stat-card">
+      <text class="stat-num">{{item.num}}</text>
+      <text class="stat-label">{{item.label}}</text>
+    </view>
+  </view>
+
+  <text class="section-label">选择模式</text>
+  <view
+    wx:for="{{modeCards}}"
+    wx:key="mode"
+    class="mode-card"
+    hover-class="mode-card-pressed"
+    hover-stay-time="80"
+    data-mode="{{item.mode}}"
+    bindtap="onModeTap"
+  >
+    <text class="mode-num">{{item.num}}</text>
+    <text class="mode-title">{{item.title}}</text>
+    <text class="mode-desc">{{item.desc}}</text>
+    <text class="mode-arrow">→</text>
+  </view>
+
+  <text class="note">题库来源：《申论规范表达8页》整理版 · 进度与错题保存在本机</text>
+</view>
