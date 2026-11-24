@@ -7,3 +7,7 @@ dist/
 
 # 微信开发者工具本地私有配置
 apps/miniprogram/project.private.config.json
+
+# 密钥类文件（小程序上传密钥等），只放 GitHub Secrets / 本地
+*.key
+!*.pub.key

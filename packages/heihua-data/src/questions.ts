@@ -1,4 +1,4 @@
-// 自动生成：来源 申论黑话挑战.html（共 261 条）。勿手改，重跑 scripts/extract-questions.mjs 重新生成。
+// 自动生成：来源 data/questions.json（共 261 条）。勿手改，重跑 scripts/extract-questions.mjs 重新生成。
 export const QUESTIONS_DATA = [
   {
     "c": "政治管理类",

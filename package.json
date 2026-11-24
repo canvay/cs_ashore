@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "miniprogram-ci": "^2.1.31"
   }
 }

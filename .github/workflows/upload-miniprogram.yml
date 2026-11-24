@@ -1,0 +1,55 @@
+# 小程序自动打包上传（miniprogram-ci，无需微信开发者工具）
+#
+# 前置（一次性，都在微信小程序管理后台操作）：
+# 1. mp.weixin.qq.com → 开发管理 → 开发设置 → 「小程序代码上传密钥」→ 生成并下载
+# 2. 同页「IP 白名单」设为关闭（GitHub runner IP 不固定，白名单开启会被拒）
+# 3. GitHub 仓库 → Settings → Secrets and variables → Actions → 新建 secret：
+#    名称 MP_UPLOAD_KEY，值为下载的密钥文件原样内容
+name: Upload Miniprogram
+
+on:
+  workflow_dispatch: # 手动触发，可填版本号/描述
+    inputs:
+      version:
+        description: '版本号（如 1.2.0，留空用默认）'
+        default: ''
+      desc:
+        description: '版本描述（留空用 commit message）'
+        default: ''
+  push:
+    branches: [main]
+    paths: ['apps/miniprogram/**', 'packages/heihua-data/**', 'scripts/upload-miniprogram.mjs', '.github/workflows/upload-miniprogram.yml']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: upload-miniprogram
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      # 小程序依赖 utils/heihua-data.js（CJS），题库改动后需重新生成
+      - name: 构建题库包
+        run: pnpm --filter @cs/heihua-data build
+
+      - name: 上传小程序代码
+        run: node scripts/upload-miniprogram.mjs
+        env:
+          MP_UPLOAD_KEY: ${{ secrets.MP_UPLOAD_KEY }}
+          MP_VERSION: ${{ github.event.inputs.version || '1.0.0' }}
+          MP_DESC: ${{ github.event.inputs.desc || github.event.head_commit.message }}
