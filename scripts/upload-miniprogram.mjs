@@ -21,13 +21,13 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
 const key = process.env.MP_UPLOAD_KEY
 if (!key) {
-  console.error('✗ 缺少环境变量 MP_UPLOAD_KEY（小程序代码上传密钥内容）')
+  console.error('✗ 缺少环境变量 MP_UPLOAD_KEY（小程序代码上传密钥内容，需包含 -----BEGIN RSA PRIVATE KEY----- 头尾行）')
   process.exit(1)
 }
 
-/* 密钥写到临时文件（miniprogram-ci 只接受 privateKeyPath） */
+/* 密钥写到临时文件（miniprogram-ci 只接受 privateKeyPath），密钥必须是完整 PEM 文件内容 */
 const keyPath = path.join(mkdtempSync(path.join(tmpdir(), 'mp-key-')), 'private.key')
-writeFileSync(keyPath, key.replace(/\r\n/g, '\n'))
+writeFileSync(keyPath, key.replace(/\r\n/g, '\n').trimEnd() + '\n')
 
 const project = new ci.Project({
   appid: APPID,
