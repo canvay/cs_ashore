@@ -33,8 +33,12 @@ jobs:
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
 
+      # heihua-data 的 dist 产物不入库（gitignore），CI 需先构建，web 解析 @cs/heihua-data 依赖它
+      - name: 构建题库包
+        run: pnpm --filter @cs/heihua-data build
+
       # 项目站点挂在 https://<user>.github.io/<repo>/ 子路径下，构建时注入 base
-      - name: 构建（base=/repo 名/）
+      - name: 构建 Web（base=/repo 名/）
         run: pnpm --filter @cs/web exec vite build --base=/${{ github.event.repository.name }}/
 
       - uses: actions/upload-pages-artifact@v3
