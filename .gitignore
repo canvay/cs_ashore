@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+.vercel
+.swc/
+
+# 微信开发者工具本地私有配置
+apps/miniprogram/project.private.config.json

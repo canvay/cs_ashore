@@ -1,0 +1,16 @@
+{
+  "name": "cs-ashore",
+  "private": true,
+  "packageManager": "pnpm@12.18.0",
+  "scripts": {
+    "dev:web": "pnpm --filter @cs/web dev",
+    "dev:mp": "echo 用微信开发者工具打开 apps/miniprogram 目录（数据改动后先 pnpm build 同步题库）",
+    "build": "pnpm -r build",
+    "logo:png": "node scripts/build-logo-png.mjs",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "esbuild": "^0.25.0"
+  }
+}

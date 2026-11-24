@@ -1,0 +1,13 @@
+packages:
+  - apps/*
+  - packages/*
+
+# pnpm 12 默认拦截依赖的构建脚本，仅放行需要编译的包
+allowBuilds:
+  esbuild: true
+  "@parcel/watcher": true
+  "@swc/core": true
+  "@tarojs/binding": true
+  "@tarojs/cli": true
+  core-js: true
+  core-js-pure: true

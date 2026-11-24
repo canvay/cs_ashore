@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+/* 现代简约主题：纯白底 + 近黑正文 + 克制亮蓝主色，仅锁定 light 主题 */
+:root,
+[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #18181b;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  --success: #16a34a;
+  --success-foreground: #ffffff;
+  --danger: #dc2626;
+  --danger-foreground: #ffffff;
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
+}
+
+@theme {
+  --font-sans: "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
+}

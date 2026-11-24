@@ -1,0 +1,52 @@
+# 部署 Web 端到 GitHub Pages
+# 前置：仓库 Settings → Pages → Source 选择「GitHub Actions」
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+    paths: ['apps/web/**', 'packages/heihua-data/**', '.github/workflows/deploy-pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4 # 从 package.json 的 packageManager 读取版本
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      # 项目站点挂在 https://<user>.github.io/<repo>/ 子路径下，构建时注入 base
+      - name: 构建（base=/repo 名/）
+        run: pnpm --filter @cs/web exec vite build --base=/${{ github.event.repository.name }}/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
