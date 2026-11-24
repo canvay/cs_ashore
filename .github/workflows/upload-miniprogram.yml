@@ -11,7 +11,7 @@ on:
   workflow_dispatch: # 手动触发，可填版本号/描述
     inputs:
       version:
-        description: '版本号（如 1.2.0，留空用默认）'
+        description: '版本号（如 0.2.0，留空用默认 0.1.0）'
         default: ''
       desc:
         description: '版本描述（留空用 commit message）'
@@ -51,5 +51,5 @@ jobs:
         run: node scripts/upload-miniprogram.mjs
         env:
           MP_UPLOAD_KEY: ${{ secrets.MP_UPLOAD_KEY }}
-          MP_VERSION: ${{ github.event.inputs.version || '1.0.0' }}
+          MP_VERSION: ${{ github.event.inputs.version || '0.1.0' }}
           MP_DESC: ${{ github.event.inputs.desc || github.event.head_commit.message }}

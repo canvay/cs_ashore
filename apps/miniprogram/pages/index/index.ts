@@ -14,6 +14,7 @@ type ViewName = 'home' | 'quiz' | 'categories' | 'game' | 'result'
 const BEST_KEY = 'shenlun_best'
 const DONE_KEY = 'shenlun_done'
 const WRONG_KEY = 'shenlun_wrong'
+const SOUND_KEY = 'shenlun_sound'
 
 function getNum(key: string, fallback: number): number {
   const v = wx.getStorageSync(key)
@@ -25,6 +26,22 @@ function getIds(key: string): number[] {
 }
 function setStore(key: string, value: number | number[]) {
   wx.setStorageSync(key, value)
+}
+function getSoundOn(): boolean {
+  return wx.getStorageSync(SOUND_KEY) !== 0
+}
+/** 播放答题音效（对应 Web 端的 Web Audio 合成提示音） */
+function playAnswerSound(ok: boolean) {
+  if (!getSoundOn()) return
+  try {
+    const ctx = wx.createInnerAudioContext()
+    ctx.src = ok ? '/audio/correct.wav' : '/audio/wrong.wav'
+    ctx.onEnded(() => ctx.destroy())
+    ctx.onError(() => ctx.destroy())
+    ctx.play()
+  } catch {
+    /* ignore */
+  }
 }
 function readStats() {
   return {
@@ -107,6 +124,7 @@ Page({
   data: {
     view: 'home' as ViewName,
     g: EMPTY_STATE as GameState,
+    soundOn: true,
     /* 模块首页的入口卡片数据 */
     portal: { count: 0, best: 0, done: 0, wrong: 0 },
     stats: readStats(),
@@ -156,6 +174,7 @@ Page({
   renderQuiz() {
     const s = readStats()
     this.setData({
+      soundOn: getSoundOn(),
       stats: s,
       statsCards: [
         { num: QUESTIONS.length, label: '题库总量' },
@@ -327,6 +346,7 @@ Page({
     if (ok) wrongIds = wrongIds.filter((x) => x !== q.id)
     else if (!wrongIds.includes(q.id)) wrongIds.push(q.id)
     setStore(WRONG_KEY, wrongIds)
+    playAnswerSound(ok)
     try {
       wx.vibrateShort({ type: ok ? 'light' : 'heavy' })
     } catch {
@@ -358,6 +378,12 @@ Page({
 
   onNextTap() {
     this.goNext()
+  },
+
+  onToggleSound() {
+    const next = !getSoundOn()
+    wx.setStorageSync(SOUND_KEY, next ? 1 : 0)
+    this.setData({ soundOn: next })
   },
 
   goNext() {

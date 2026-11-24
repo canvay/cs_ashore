@@ -37,7 +37,7 @@ const project = new ci.Project({
   ignores: ['node_modules/**/*'],
 })
 
-const version = process.env.MP_VERSION || '1.0.0'
+const version = process.env.MP_VERSION || '0.1.0'
 const desc = (process.env.MP_DESC || 'GitHub Actions 自动上传').slice(0, 100)
 
 const result = await ci.upload({
