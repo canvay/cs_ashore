@@ -1,0 +1,27 @@
+<!-- 指南文章列表：样式对齐 web 端列表页 -->
+<view class="container">
+  <view class="page-hero">
+    <text class="page-hero-title">考公指南</text>
+    <text class="page-hero-sub">从「考公是什么」开始：认识考试的本质，和要考的科目。</text>
+  </view>
+
+  <view
+    wx:for="{{articles}}"
+    wx:key="slug"
+    class="article-card"
+    hover-class="article-card-pressed"
+    hover-stay-time="80"
+    data-slug="{{item.slug}}"
+    bindtap="openArticle"
+  >
+    <view class="article-card-order">{{item.orderLabel}}</view>
+    <view class="article-card-body">
+      <text class="article-card-title">{{item.title}}</text>
+      <text class="article-card-summary">{{item.summary}}</text>
+      <text class="article-card-meta">{{item.meta}}</text>
+    </view>
+    <text class="article-card-arrow">→</text>
+  </view>
+
+  <text class="note">文章内容与 Web 端同步，新增文章自动出现在这里</text>
+</view>

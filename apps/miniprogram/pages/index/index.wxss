@@ -1,4 +1,17 @@
 /* ---------- 模块首页专属样式 ---------- */
+/* 指南入口：白底普通卡（黑话挑战保持蓝色主推样式） */
+.portal-entry-plain {
+  background: #fff;
+  border-color: #f4f4f5;
+  margin-bottom: 10px;
+}
+.portal-entry-tile-plain {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+.portal-entry-plain .portal-entry-arrow {
+  color: rgba(24, 24, 27, 0.3);
+}
 .brand-logo-img {
   width: 52px;
   height: 50px;

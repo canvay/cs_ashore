@@ -1,0 +1,148 @@
+/* ---------- 文章详情页专属样式（对齐 web 端 BlockRenderer） ---------- */
+.block-p {
+  display: block;
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(24, 24, 27, 0.8);
+  margin-top: 18px;
+}
+.block-h2 {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: #18181b;
+  margin-top: 34px;
+  margin-bottom: 10px;
+}
+
+/* 无序列表 */
+.block-list {
+  margin-top: 18px;
+}
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.list-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2563eb;
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+.list-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(24, 24, 27, 0.8);
+}
+
+/* 有序步骤 */
+.block-steps {
+  margin-top: 18px;
+}
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(24, 24, 27, 0.08);
+  color: rgba(24, 24, 27, 0.6);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(24, 24, 27, 0.8);
+}
+
+/* 表格卡片 */
+.block-table {
+  margin-top: 18px;
+}
+.table-card {
+  background: #fff;
+  border: 1px solid #f4f4f5;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.table-card-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #18181b;
+  margin-bottom: 8px;
+}
+.table-card-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.table-card-k {
+  font-size: 12px;
+  color: rgba(24, 24, 27, 0.55);
+  width: 72px;
+  flex-shrink: 0;
+  line-height: 1.7;
+}
+.table-card-v {
+  flex: 1;
+  font-size: 12px;
+  color: rgba(24, 24, 27, 0.75);
+  line-height: 1.7;
+}
+
+/* 提示框 */
+.block-callout {
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-top: 18px;
+}
+.callout-info {
+  background: rgba(37, 99, 235, 0.1);
+}
+.callout-tip {
+  background: rgba(22, 163, 74, 0.1);
+}
+.callout-warn {
+  background: rgba(217, 119, 6, 0.1);
+}
+.callout-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #3f3f46;
+}
+
+/* 文章不存在 */
+.missing {
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.missing-text {
+  font-size: 14px;
+  color: rgba(24, 24, 27, 0.6);
+  margin-bottom: 20px;
+}
+.missing-btn {
+  font-size: 13px;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  border-radius: 99px;
+  padding: 0 20px;
+  line-height: 2.4;
+}

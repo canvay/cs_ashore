@@ -7,6 +7,14 @@
   </view>
 
   <text class="section-label">模块列表</text>
+  <view class="portal-entry portal-entry-plain" hover-class="portal-entry-pressed" hover-stay-time="80" bindtap="openGuide">
+    <view class="portal-entry-tile portal-entry-tile-plain">指</view>
+    <view class="portal-entry-body">
+      <text class="portal-entry-title">考公指南</text>
+      <text class="portal-entry-meta">{{guide.count}} 篇 · 从考公是什么开始</text>
+    </view>
+    <text class="portal-entry-arrow">→</text>
+  </view>
   <view class="portal-entry" hover-class="portal-entry-pressed" hover-stay-time="80" bindtap="openQuiz">
     <view class="portal-entry-tile">申</view>
     <view class="portal-entry-body">

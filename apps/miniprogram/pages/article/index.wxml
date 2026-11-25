@@ -1,0 +1,49 @@
+<!-- 文章详情：块类型逐一渲染，样式对齐 web 端 BlockRenderer -->
+<view class="container">
+  <view wx:if="{{notFound}}" class="missing">
+    <text class="missing-text">文章不存在</text>
+    <button class="missing-btn" bindtap="backToGuide">返回指南列表</button>
+  </view>
+
+  <block wx:else>
+    <view wx:for="{{blocks}}" wx:key="index" wx:for-item="block">
+      <!-- 段落 -->
+      <text wx:if="{{block.kind === 'p'}}" class="block-p">{{block.text}}</text>
+
+      <!-- 小节标题 -->
+      <text wx:elif="{{block.kind === 'h2'}}" class="block-h2">{{block.text}}</text>
+
+      <!-- 无序列表 -->
+      <view wx:elif="{{block.kind === 'list'}}" class="block-list">
+        <view wx:for="{{block.items}}" wx:for-item="item" wx:key="index" class="list-item">
+          <view class="list-dot" />
+          <text class="list-text">{{item}}</text>
+        </view>
+      </view>
+
+      <!-- 有序步骤 -->
+      <view wx:elif="{{block.kind === 'steps'}}" class="block-steps">
+        <view wx:for="{{block.items}}" wx:for-item="item" wx:key="index" class="step-item">
+          <view class="step-num">{{index + 1}}</view>
+          <text class="step-text">{{item}}</text>
+        </view>
+      </view>
+
+      <!-- 表格（已转卡片） -->
+      <view wx:elif="{{block.kind === 'table'}}" class="block-table">
+        <view wx:for="{{block.cards}}" wx:for-item="card" wx:key="index" class="table-card">
+          <text class="table-card-title">{{card.title}}</text>
+          <view wx:for="{{card.entries}}" wx:for-item="entry" wx:key="k" class="table-card-row">
+            <text class="table-card-k">{{entry.k}}</text>
+            <text class="table-card-v">{{entry.v}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 提示框：info 蓝 / tip 绿 / warn 橙 -->
+      <view wx:elif="{{block.kind === 'callout'}}" class="block-callout callout-{{block.tone}}">
+        <text class="callout-text">{{block.text}}</text>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,5 +1,12 @@
 {
-  "pages": ["pages/index/index", "pages/quiz/index", "pages/categories/index", "pages/game/index"],
+  "pages": [
+    "pages/index/index",
+    "pages/guide/index",
+    "pages/article/index",
+    "pages/quiz/index",
+    "pages/categories/index",
+    "pages/game/index"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FFFFFF",

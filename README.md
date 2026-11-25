@@ -7,12 +7,18 @@
 - **Web 端**：https://canvay.github.io/cs_ashore/
 - **小程序端**：微信开发者工具打开 `apps/miniprogram`（appid 已配置）
 
-## 模块
+## 板块
 
-| 模块 | 说明 | 端 |
+### 指南（Web + 小程序）
+
+面向零基础的考公知识介绍：考公的本质、行测、申论、上海市考大纲解读等。文章以结构化 TS 数据存放在 `packages/guide-data/`（web / 小程序共用），增改文章只需编辑 `src/index.ts`，然后 `pnpm --filter @cs/guide-data build` 同步两端。
+
+### 工具
+
+| 工具 | 说明 | 端 |
 | --- | --- | --- |
 | 黑话挑战 | 闯关答题 / 60 秒速答 / 分类专练 / 错题重做 | Web + 小程序 |
-| 更多模块 | 筹备中 | — |
+| 更多工具 | 筹备中 | — |
 
 ## 仓库结构
 
@@ -22,12 +28,14 @@ cs_ashore/
 │   ├── web/               # Vite 6 + React 19 + HeroUI v3 + Tailwind CSS 4
 │   └── miniprogram/       # 微信原生 + TypeScript（单页多视图状态机）
 ├── packages/
-│   └── heihua-data/       # 题库单一来源（data/questions.json 源 + tsc 产 ESM）
+│   ├── heihua-data/       # 题库单一来源（data/questions.json 源 + tsc 产 ESM）
+│   └── guide-data/        # 指南文章单一来源（web / 小程序共用）
 ├── assets/brand/          # ForAshore 品牌 logo 源文件
 ├── scripts/
-│   ├── extract-questions.mjs        # 校验题库 JSON 并生成 questions.ts
-│   ├── build-miniprogram-data.mjs   # esbuild 打 CJS 同步到小程序
-│   └── build-logo-png.mjs           # 品牌 SVG 转 PNG（小程序 <image> 不支持 SVG）
+│   ├── extract-questions.mjs          # 校验题库 JSON 并生成 questions.ts
+│   ├── build-miniprogram-data.mjs     # esbuild 打 CJS 同步题库到小程序
+│   ├── build-miniprogram-guide-data.mjs # esbuild 打 CJS 同步指南文章到小程序
+│   └── build-logo-png.mjs             # 品牌 SVG 转 PNG（小程序 <image> 不支持 SVG）
 └── docs/                  # 需求文档 / 技术方案
 ```
 
