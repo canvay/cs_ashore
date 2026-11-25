@@ -5,7 +5,8 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main, master]
-    paths: ['apps/web/**', 'packages/heihua-data/**', '.github/workflows/deploy-pages.yml']
+    paths:
+      ['apps/web/**', 'packages/heihua-data/**', 'packages/guide-data/**', '.github/workflows/deploy-pages.yml']
   workflow_dispatch:
 
 permissions:
@@ -33,9 +34,11 @@ jobs:
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
 
-      # heihua-data 的 dist 产物不入库（gitignore），CI 需先构建，web 解析 @cs/heihua-data 依赖它
-      - name: 构建题库包
-        run: pnpm --filter @cs/heihua-data build
+      # dist 产物不入库（gitignore），CI 需先构建，web 解析 @cs/* 依赖它们
+      - name: 构建数据包（题库 + 指南文章）
+        run: |
+          pnpm --filter @cs/heihua-data build
+          pnpm --filter @cs/guide-data build
 
       # 项目站点挂在 https://<user>.github.io/<repo>/ 子路径下，构建时注入 base
       - name: 构建 Web（base=/repo 名/）
